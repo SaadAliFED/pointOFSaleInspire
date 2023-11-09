@@ -29,7 +29,7 @@ import { ApplicationInterceptor } from './Shared/shared/GlobelRequest/applicatio
       multi: true,
     },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }]
-    ,
+  ,
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],

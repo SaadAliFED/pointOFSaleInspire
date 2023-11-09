@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ApiResponse } from 'src/app/Domain/api-response';
@@ -7,17 +7,12 @@ import { AuthenticationService } from 'src/app/Shared/shared/Services/authentica
 import { UtilityService } from 'src/app/Shared/shared/Services/utility.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-forgetpassword',
+  templateUrl: './forgetpassword.component.html',
+  styleUrls: ['./forgetpassword.component.scss'],
 })
-export class LoginComponent implements OnInit {
-  // showPassword: boolean = false;
-  // togglePasswordVisibility(value: boolean) {
-
-  //   this.showPassword = value == true ? true : false;
-  // }
-  loginForm!: FormGroup;
+export class ForgetpasswordComponent  implements OnInit {
+  ForgetForm!: FormGroup;
   showLoader: boolean = true;
 
   constructor(private router: Router,
@@ -27,25 +22,24 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.loginForm = new FormGroup({
+    this.ForgetForm = new FormGroup({
       Email: new FormControl('', [Validators.required, Validators.email]),
-      Password: new FormControl('', [Validators.required]),
-      Role: new FormControl('SuperAdmin', [Validators.required])
     });
   }
 
-  Login() {
+  forget() {
 
     debugger
-    this.loginForm.markAllAsTouched()
-    if (this.loginForm.invalid) return;
-    this.authService.Login(this.loginForm.value).subscribe((response: ApiResponse) => {
+    this.ForgetForm.markAllAsTouched()
+    if (this.ForgetForm.invalid) return;
+    const email = this.ForgetForm.get('Email')?.value;
+    this.authService.ForgotPassword(email).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
-        this.utility.SetLoginData(response);
-        this.presentSuccessToast('Login Successfully');
-        this.router.navigate(['/home']);
+       
+        this.presentSuccessToast('Mail Send Successfully');
+        this.router.navigate(['auth/login']);
       } else {
-        this.presentErrorToast('Invalid credentials');
+        this.presentErrorToast('Mail not send');
       }
     });
 
@@ -71,4 +65,5 @@ export class LoginComponent implements OnInit {
     });
     toast.present();
   }
+
 }
