@@ -23,14 +23,12 @@ export class ApplicationInterceptor implements HttpInterceptor {
     const token: any = this.utilityService.GetAuthToken();
 
     if (token) {
-      debugger
       request = request.clone({
         url: environment.apiRootURL + request.url,
         setHeaders: { Authorization: `bearer ${token}` }
       });
     }
     else {
-      debugger
       request = request.clone({
         url: environment.apiRootURL + request.url
       });
