@@ -67,7 +67,7 @@ export class HomePage {
     this.route.queryParams
     .subscribe((params:any) => {
       // let id=params.outletId
-      let id=1
+      let id=1;
       if(id){
         this.CreateChart("pie", "oilChart",id);
 
@@ -103,6 +103,7 @@ export class HomePage {
       }
     })
   }
+  
   GetTodayStatus(outletId:number) {
     this.dashboardService.GetTodayStatus(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
