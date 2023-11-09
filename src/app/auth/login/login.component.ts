@@ -32,9 +32,10 @@ export class LoginComponent  implements OnInit {
   }
 
   Login(){
-    this.router.navigate(['/home']);debugger
+    
+    debugger
     this.authService.Login(this.loginForm.value).subscribe (res => {
-      
+      this.router.navigate(['/home']);
     })
       
   }

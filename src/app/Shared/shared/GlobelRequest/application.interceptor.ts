@@ -8,9 +8,9 @@ import {
 import { Observable, catchError, finalize, map, throwError } from 'rxjs';
 import { UtilityService } from '../Services/utility.service';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { LoadingServiceService } from '../Services/loading-service.service';
 import { ToastController } from '@ionic/angular';
+import { LoadingServiceService } from '../Services/loading-service.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class ApplicationInterceptor implements HttpInterceptor {
@@ -23,13 +23,14 @@ export class ApplicationInterceptor implements HttpInterceptor {
     const token: any = this.utilityService.GetAuthToken();
 
     if (token) {
-      // If we have a token, we set it to the header
+      debugger
       request = request.clone({
         url: environment.apiRootURL + request.url,
         setHeaders: { Authorization: `bearer ${token}` }
       });
     }
     else {
+      debugger
       request = request.clone({
         url: environment.apiRootURL + request.url
       });
@@ -44,7 +45,7 @@ export class ApplicationInterceptor implements HttpInterceptor {
         if (err.status === 401) {
           this.presentUnauthorizedToast();
           localStorage.clear();
-          this.route.navigate(['master/login']);
+          this.route.navigate(['login']);
         }
 
         const error = err.error.message || err.statusText;
@@ -59,7 +60,7 @@ export class ApplicationInterceptor implements HttpInterceptor {
       duration: 3000, // Adjust the duration as needed
       position: 'top', // Adjust the position as needed
     });
-  
+
     await toast.present();
   }
 }

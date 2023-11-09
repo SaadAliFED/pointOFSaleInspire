@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiResponse } from 'src/app/Domain/api-response';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  baseurl = environment.apiRootURL
   constructor(private route: Router, private http: HttpClient) { }
 
   Logout() {
