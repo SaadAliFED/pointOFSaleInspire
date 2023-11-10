@@ -9,6 +9,7 @@ import { DashboardService } from '../Shared/shared/Services/dashboard.service';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
+
 export class HomePage {
 
   showLoader: boolean = true;
@@ -25,64 +26,106 @@ export class HomePage {
   dailySummary: any[] = [];
   todayStatus: any[] = [];
   todayTotal: number = 0;
-  constructor(private dashboardService: DashboardService,private route: ActivatedRoute,
+  traction: any[] = [];
+  constructor(private dashboardService: DashboardService, private route: ActivatedRoute,
     private router: Router) { }
-  CreateChart(type: string, id: string,outletId:number) {
-    var oilCanvas: any = document.getElementById(id);
 
-    var oilData = {
-      labels: [
-        "Saudi Arabia",
-        "Russia",
-        "Iraq",
-        "United Arab Emirates",
-        "Canada"
-      ],
-      datasets: [
-        {
-          data: [133.3, 86.2, 52.2, 51.2, 50.2],
-          backgroundColor: [
-            "#FF6384",
-            "#63FF84",
-            "#84FF63",
-            "#8463FF",
-            "#6384FF"
-          ]
-        }]
-    };
-    this.showLoader = true;
-    this.dashboardService.GetChartsByType(type,outletId).subscribe((response: ApiResponse) => {
+  public linechart: any;
+  public pieChart: any;
+
+  ngOnInit(): void {
+
+    this.route.queryParams
+      .subscribe((params: any) => {
+        let id = params.outletId
+        // let id=1;
+        if (id) {
+          this.createChartPie("pie", "pieChart", id);
+
+          this.createChartLine("line", "lineChart", id);
+          this.GetGroupSummary(id);
+          this.GetTodayStatus(id);
+          this.GetTraction(id);
+          this.GetDailySummaryByDate(id);
+        }
+      }
+      );
+
+  }
+
+
+  createChartLine(type: string, id: string, outletId: number) {
+    const ctx = document.getElementById(id) as HTMLCanvasElement;
+
+    this.dashboardService.GetChartsByType(type, outletId).subscribe((response: ApiResponse) => {
       this.showLoader = false;
       if (response.IsSuccess && response.ReturnObject != null) {
-        oilData = response.ReturnObject;
-      }
-      var pieChart = new Chart(oilCanvas, {
-        type: type == "pie" ? "pie" : "line",
-        data: oilData
-      });
-    })
-  }
-  ngOnInit(): void {
-    
-    this.route.queryParams
-    .subscribe((params:any) => {
-      // let id=params.outletId
-      let id=1;
-      if(id){
-        this.CreateChart("pie", "oilChart",id);
+        // Assuming apiData has the same structure as your ReturnObject
+        this.data = {
+          labels: response.ReturnObject.labels,
+          datasets: [
+            {
+              data: response.ReturnObject.datasets[0].data,
+              backgroundColor: response.ReturnObject.datasets[0].backgroundColor,
+              fill: false, // Specify this to create a line chart without filling the area under the line
+            },
+          ],
+        };
 
-        this.CreateChart("line", "lineChart",id);
-        this.GetGroupSummary(id);
-        this.GetTodayStatus(id);
-        this.GetDailySummaryByDate(id);
+        if (this.linechart) {
+          this.linechart.data = this.data;
+          this.linechart.update();
+        } else {
+          this.linechart = new Chart(ctx, {
+            type: 'line',
+            data: this.data,
+            options: {
+              // Add any additional options here
+            },
+          });
+        }
       }
+    });
+  }
+
+  createChartPie(type: string, id: string, outletId: number) {
+    const ctx = document.getElementById(id) as HTMLCanvasElement;
+
+    if (!ctx) {
+      console.error(`Canvas element with id "${id}" not found.`);
+      return;
     }
-  );
 
+    this.dashboardService.GetChartsByType(type, outletId).subscribe((response: ApiResponse) => {
+      this.showLoader = false;
+      if (response.IsSuccess && response.ReturnObject != null) {
+        // Assuming apiData has the same structure as your ReturnObject
+        this.data = {
+          labels: response.ReturnObject.labels,
+          datasets: [
+            {
+              data: response.ReturnObject.datasets[0].data,
+              backgroundColor: response.ReturnObject.datasets[0].backgroundColor,
+            },
+          ],
+        };
+
+        if (this.pieChart) {
+          // If the chart already exists, update its data
+          this.pieChart.data = this.data;
+          this.pieChart.update();
+        } else {
+          // If the chart doesn't exist, create a new pie chart
+          this.pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: this.data,
+          });
+        }
+      }
+    });
   }
-  
 
-  GetDailySummaryByDate(outletId:number) {
+  GetDailySummaryByDate(outletId: number) {
     this.dashboardService.GetDailySummaryByDate(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.detail = response.ReturnObject;
@@ -96,34 +139,38 @@ export class HomePage {
     })
   }
 
-  GetGroupSummary(outletId:number) {
+  GetGroupSummary(outletId: number) {
     this.dashboardService.GetGroupSummary(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.itemSummary = response.ReturnObject;
       }
     })
   }
-  
-  GetTodayStatus(outletId:number) {
+
+  GetTraction(outletId: number) {
+    this.dashboardService.GetTraction(outletId).subscribe((response: ApiResponse) => {
+      if (response.IsSuccess) {
+        this.traction = response.ReturnObject;
+      }
+    })
+  }
+
+  GetTodayStatus(outletId: number) {
     this.dashboardService.GetTodayStatus(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.todayStatus = response.ReturnObject;
       }
     })
   }
-  
+
   RoutePage(pathName: string) {
     this.router.navigate([pathName])
   }
 
 
-  navigate(path:string){
+  navigate(path: string) {
     this.router.navigateByUrl(path);
   }
-  Logout(){
-      this.router.navigate(['/auth/login']);
 
-  }
 
 }
-

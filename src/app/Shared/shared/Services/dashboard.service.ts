@@ -15,6 +15,9 @@ export class DashboardService {
   GetDailySummary(outletId: number) {
     return this.http.get<ApiResponse>("Dashboard/GetDailySummary?outletId=" + outletId)
   }
+  GetTraction(outletId: number) {
+    return this.http.get<ApiResponse>("Dashboard/GetTransaction?outletId=" + outletId)
+  }
 
   GetGroupSummary(outletId: number) {
     return this.http.get<ApiResponse>("Dashboard/GetGroupSummary?outletId=" + outletId)

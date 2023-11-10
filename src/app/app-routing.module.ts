@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 //import { Chart } from 'chart.js';
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'dashboard',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
     // canActivate: [LoadingGuard],
   },

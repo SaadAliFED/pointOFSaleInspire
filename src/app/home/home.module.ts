@@ -7,6 +7,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { Chart } from 'chart.js';
 import { SharedModule } from '../Shared/shared/shared.module';
 import { OutletComponent } from './outlet/outlet.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -15,10 +16,13 @@ import { OutletComponent } from './outlet/outlet.component';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
- 
+
     SharedModule
   ],
-  declarations: [HomePage,
-  OutletComponent]
+  declarations: [
+    HomePage,
+    OutletComponent,
+    DashboardComponent
+  ]
 })
-export class HomePageModule {}
+export class HomePageModule { }

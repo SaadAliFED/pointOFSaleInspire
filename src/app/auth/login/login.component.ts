@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ApiResponse } from 'src/app/Domain/api-response';
 import { AuthenticationService } from 'src/app/Shared/shared/Services/authentication.service';
@@ -19,31 +19,42 @@ export class LoginComponent implements OnInit {
   // }
   loginForm!: FormGroup;
   showLoader: boolean = true;
-
+  ReturnUrl: string = '';
   constructor(private router: Router,
     private authService: AuthenticationService,
     private toastController: ToastController,
-    private utility: UtilityService
+    private utility: UtilityService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
+    let token = this.utility.GetAuthToken();
+    let role = this.utility.GetUserRole();
+    if (token && role) {
+      this.router.navigate(['dashboard'])
+    }
     this.loginForm = new FormGroup({
       Email: new FormControl('', [Validators.required, Validators.email]),
       Password: new FormControl('', [Validators.required]),
       Role: new FormControl('SuperAdmin', [Validators.required])
     });
+    this.ReturnUrl = this.route.snapshot.queryParams['returnUrl'] || 'dashboard';
   }
 
   Login() {
-
-    debugger
     this.loginForm.markAllAsTouched()
     if (this.loginForm.invalid) return;
     this.authService.Login(this.loginForm.value).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
-        this.utility.SetLoginData(response);
+        this.utility.SetLoginData(response.ReturnObject);
         this.presentSuccessToast('Login Successfully');
-        this.router.navigate(['/home']);
+        if (response.ReturnObject.TotalOutlets > 1) {
+          this.router.navigate(["outlet"])
+        }
+        else {
+          this.router.navigate([this.ReturnUrl], { queryParams: { outletId: response.ReturnObject.OutletId } })
+        }
+
       } else {
         this.presentErrorToast('Invalid credentials');
       }
