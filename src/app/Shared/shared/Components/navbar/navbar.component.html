@@ -22,7 +22,22 @@
       <ion-title>Shops</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content class="ion-padding">This is the menu content.</ion-content>
+  <ion-content class="ion-padding">
+    <ion-menu-toggle *ngFor="let item of outlets">
+      <ion-button (click)="link(item.Id)">{{item.Name}} </ion-button>
+      <!-- <ion-radio-group [(ngModel)]="menuType">
+        <ion-item>
+          <ion-radio value="overlay">
+            <code>overlay</code>
+          </ion-radio>
+        </ion-item>
+      </ion-radio-group>-->
+    </ion-menu-toggle> 
+    <!-- <div *ngFor="let item of outlets">
+      <a class="btn btn-primary text-uppercase" [routerLink]="['/dashboard']"
+      [queryParams]="{ outletId: item.Id}">view Details</a>
+    </div> -->
+    </ion-content>
 </ion-menu>
 <div id="main-content">
   <ion-header>

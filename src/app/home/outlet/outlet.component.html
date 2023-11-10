@@ -6,8 +6,8 @@
         <h4 class="box-title">{{item.Name}} </h4>
         <div class="box-heading text-uppercase">{{item.Value}}</div>
         <div class="box-btns">
-          <a class="btn btn-primary text-uppercase" [routerLink]="['/home']"
-            [queryParams]="{ outletId: item.Id}">view Details</a>
+            <a class="btn btn-primary text-uppercase" [routerLink]="['/dashboard']"
+              [queryParams]="{ outletId: item.Id}">view Details</a>
         </div>
         <div class="box-id">{{item.Id}}</div>
       </div>

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../Services/authentication.service';
 import { ApiResponse } from 'src/app/Domain/api-response';
 import { ToastController } from '@ionic/angular';
+import { DashboardService } from '../../Services/dashboard.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,9 +16,28 @@ export class NavbarComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private toastController: ToastController,
+    private dashboardService: DashboardService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.GetOutlets()
+  }
+
+  link(id: any) {
+    this.router.navigate(['/dashboard'], { queryParams: { outletId: id } });
+  }
+
+  outlets: any[] = [];
+
+  GetOutlets() {
+    debugger
+    this.dashboardService.GetOutlets().subscribe((response: ApiResponse) => {
+      if (response.IsSuccess && response.ReturnObject.length > 0) {
+        this.outlets = response.ReturnObject;
+      }
+    })
+  }
+
   Logout() {
     this.authService.Logout().subscribe((res: ApiResponse) => {
       if (res.IsSuccess) {
