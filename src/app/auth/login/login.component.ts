@@ -42,11 +42,14 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
-    this.loginForm.markAllAsTouched()
-    if (this.loginForm.invalid) return;
+    // this.loginForm.markAllAsTouched()
+    // if (this.loginForm.invalid) return;a
+    alert('F hit')
     this.authService.Login(this.loginForm.value).subscribe((response: ApiResponse) => {
+      alert('api hit')
       if (response.IsSuccess) {
-        this.utility.SetLoginData(response.ReturnObject);
+        alert('api hit sucessfull')
+        this.utility.SetLoginData(response?.ReturnObject);
         this.presentSuccessToast('Login Successfully');
         if (response.ReturnObject.TotalOutlets > 1) {
           this.router.navigate(["outlet"])

@@ -23,15 +23,19 @@ export class ApplicationInterceptor implements HttpInterceptor {
     const token: any = this.utilityService.GetAuthToken();
 
     if (token) {
+     
       request = request.clone({
         url: environment.apiRootURL + request.url,
         setHeaders: { Authorization: `bearer ${token}` }
       });
+      // alert('in')
     }
     else {
       request = request.clone({
         url: environment.apiRootURL + request.url
+       
       });
+      alert('request')
     }
     this.loaderService.showLoader();
     return next.handle(request).pipe(

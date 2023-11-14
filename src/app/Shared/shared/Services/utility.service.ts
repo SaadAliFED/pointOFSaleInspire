@@ -14,11 +14,11 @@ export class UtilityService {
   }
   SetLoginData(authData: any) {
     debugger
-    localStorage.setItem('userId', authData.Id);
-    localStorage.setItem('userName', authData.Name + ' ' + authData.FatherName);
-    localStorage.setItem('userEmail', authData.Email);
-    localStorage.setItem('userToken', authData.Token);
-    localStorage.setItem('userRole', authData.Role);
+    localStorage.setItem('userId', authData?.Id);
+    localStorage.setItem('userName', authData?.Name + ' ' + authData.FatherName);
+    localStorage.setItem('userEmail', authData?.Email);
+    localStorage.setItem('userToken', authData?.Token);
+    localStorage.setItem('userRole', authData?.Role);
   }
   GetUserId() {
     return localStorage.getItem('userId')

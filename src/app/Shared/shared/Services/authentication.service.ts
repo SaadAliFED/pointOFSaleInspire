@@ -26,6 +26,7 @@ export class AuthenticationService {
     return this.http.post<ApiResponse>('Authentication/ResetPassword?', data)
   }
   Login(model: any) {
+    alert('api hit call')
     return this.http.post<ApiResponse>('Authentication/Login', model)
   }
   GetUserMenus(id:number) {
