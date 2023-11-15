@@ -40,7 +40,7 @@ export class AdminAuthGuard implements CanActivate {
           handler: () => {
             this.authService.Logout();
             localStorage.clear();
-            this.route.navigate(['login'], { queryParams: { returnUrl: returnUrl } });
+            this.route.navigate(['auth/login']);
           }
         }
       ]

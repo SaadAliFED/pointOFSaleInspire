@@ -76,12 +76,12 @@
               </ion-row>
             </ion-header>
             <ion-row *ngFor="let item of traction">
-              <ion-col>{{ item.Id }}</ion-col>
-              <ion-col>{{ item.CreatedDateString }}</ion-col>
-              <ion-col>{{ item.Amount }}</ion-col>
+              <ion-col>{{ item?.Id }}</ion-col>
+              <ion-col>{{ item?.CreatedDateString }}</ion-col>
+              <ion-col>{{ item?.Amount }}</ion-col>
              
-              <ion-col>{{ item.Cash }}</ion-col>
-              <ion-col>{{ item.BillNo }}</ion-col>
+              <ion-col>{{ item?.Cash }}</ion-col>
+              <ion-col>{{ item?.BillNo }}</ion-col>
 
             </ion-row>
           </ion-grid>

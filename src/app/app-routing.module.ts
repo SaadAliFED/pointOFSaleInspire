@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AdminAuthGuard } from './Shared/shared/GlobelRequest/admin-auth.guard';
 // import { LoadingGuard } from './Shared/shared/Services/loading.guard';
 //import { Chart } from 'chart.js';
 const routes: Routes = [
   {
     path: 'dashboard',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
-    // canActivate: [LoadingGuard],
+    canActivate: [AdminAuthGuard],
   },
   {
     path:'auth',
