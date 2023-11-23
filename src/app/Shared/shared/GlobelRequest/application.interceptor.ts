@@ -35,7 +35,6 @@ export class ApplicationInterceptor implements HttpInterceptor {
         url: environment.apiRootURL + request.url
        
       });
-      alert('request')
     }
     this.loaderService.showLoader();
     return next.handle(request).pipe(

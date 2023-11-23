@@ -116,10 +116,10 @@
 
         <ion-col *ngFor="let item of todayStatus" size="12" size-sm="12"
           size-md="4">
-          <div class="group">Total No Customer: {{item.Id}}</div>
-          <div class="group">Last Punched: {{item.LastBillTime}}</div>
+          <div class="group">Total No Customer: {{item?.Id}}</div>
+          <div class="group">Last Punched: {{item?.LastBillTime}}</div>
           <div class="group">Total Bills: {{10}}</div>
-          <div class="abc">Total Bill Amount %: {{item.LastBillAmount}}</div>
+          <div class="abc">Total Bill Amount %: {{item?.LastBillAmount}}</div>
           <br>
           <div class="abc">Amount %: 9</div>
         </ion-col>

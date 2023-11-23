@@ -159,6 +159,7 @@ export class HomePage {
     this.dashboardService.GetTodayStatus(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.todayStatus = response.ReturnObject;
+        console.log('status', this.todayStatus)
       }
     })
   }

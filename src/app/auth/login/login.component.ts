@@ -30,9 +30,9 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     let token = this.utility.GetAuthToken();
     let role = this.utility.GetUserRole();
-    if (token && role) {
-      this.router.navigate(['dashboard'])
-    }
+    // if (token && role) {
+    //   this.router.navigate(['dashboard'])
+    // }
     this.loginForm = new FormGroup({
       Email: new FormControl('', [Validators.required, Validators.email]),
       Password: new FormControl('', [Validators.required]),
@@ -44,11 +44,8 @@ export class LoginComponent implements OnInit {
   Login() {
     // this.loginForm.markAllAsTouched()
     // if (this.loginForm.invalid) return;a
-    alert('F hit')
     this.authService.Login(this.loginForm.value).subscribe((response: ApiResponse) => {
-      alert('api hit')
       if (response.IsSuccess) {
-        alert('api hit sucessfull')
         this.utility.SetLoginData(response?.ReturnObject);
         this.presentSuccessToast('Login Successfully');
         if (response.ReturnObject.TotalOutlets > 1) {

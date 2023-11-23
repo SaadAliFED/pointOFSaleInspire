@@ -5,7 +5,7 @@ const config: CapacitorConfig = {
   appName: 'PointOfSales',
   webDir: 'www',
   server: {
-    androidScheme: 'https'
+    androidScheme: 'http'
   }
 };
 
