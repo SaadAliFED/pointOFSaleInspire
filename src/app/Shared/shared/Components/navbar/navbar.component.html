@@ -14,7 +14,7 @@
       </ion-title>
 
       <!-- Move ion-menu-toggle button to the right by placing it in a slot="end"  -->
-      <ion-buttons slot="end" class="ion-hide-md-down">
+      <ion-buttons slot="secondary" class="ion-hide-md-down">
         <ion-menu-toggle *ngFor="let item of outlets">
           <ion-button fill="clear" (click)="link(item.Id)">{{item.Name}}
             <ion-icon slot="start" name="chevron-down"></ion-icon></ion-button>
@@ -36,9 +36,9 @@
   </ion-header>
 </div>
 
-<ion-menu contentId="main-content">
+<ion-menu  contentId="main-content">
   <ion-header>
-    <ion-toolbar class="ion-hide-md-up"
+    <ion-toolbar
       style="--background:linear-gradient(to bottom right, #66b2ed, #1f3b50) !important; color: whitesmoke;">
       <ion-title>Shops</ion-title>
       <ion-icon style="margin-left: 5px; margin-right: 5px;" size="large"
