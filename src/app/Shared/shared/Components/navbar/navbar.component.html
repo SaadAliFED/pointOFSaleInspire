@@ -1,9 +1,8 @@
 
 <div id="main-content">
   <ion-header>
-    <ion-toolbar
-      style="--background:linear-gradient(to bottom right, #66b2ed, #1f3b50) !important; color: whitesmoke; margin-bottom:5px;">
-      <ion-buttons slot="start" class="ion-hide-lg-up">
+    <ion-toolbar style="--background:linear-gradient(to bottom right, #66b2ed, #1f3b50) !important; color: whitesmoke; margin-bottom:5px;">
+      <ion-buttons slot="start"  class="ion-hide-lg-up">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>
@@ -12,44 +11,34 @@
         </a>
         Ecommerce
       </ion-title>
-
+      
       <!-- Move ion-menu-toggle button to the right by placing it in a slot="end"  -->
-      <ion-buttons slot="secondary" class="ion-hide-md-down">
+      <ion-buttons slot="end" class="ion-hide-md-down">
         <ion-menu-toggle *ngFor="let item of outlets">
-          <ion-button fill="clear" (click)="link(item.Id)">{{item.Name}}
-            <ion-icon slot="start" name="chevron-down"></ion-icon></ion-button>
+          <ion-button   fill="clear" (click)="link(item.Id)">{{item.Name}}
+          <ion-icon   slot="start" name="chevron-down"></ion-icon></ion-button>
         </ion-menu-toggle>
       </ion-buttons>
 
-      <ion-button class="ion-hide-sm-down" (click)="Logout()" color="danger"
-        slot="end">
-        <ion-icon slot="start" name="power"></ion-icon>
-        <span>Logout</span>
+      <ion-button (click)="Logout()" color="danger" slot="end">
+        <ion-icon   slot="start" name="power"></ion-icon>
+        <span  class="ion-hide-sm-down">Logout</span>
       </ion-button>
-      <ion-buttons class="ion-hide-sm-up" slot="end">
-
-        <ion-button>
-          <ion-icon slot="icon-only" name="power"></ion-icon>
-        </ion-button>
-      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 </div>
 
-<ion-menu  contentId="main-content">
+<ion-menu contentId="main-content">
   <ion-header>
-    <ion-toolbar
-      style="--background:linear-gradient(to bottom right, #66b2ed, #1f3b50) !important; color: whitesmoke;">
+    <ion-toolbar style="--background:linear-gradient(to bottom right, #66b2ed, #1f3b50) !important; color: whitesmoke;">
       <ion-title>Shops</ion-title>
-      <ion-icon style="margin-left: 5px; margin-right: 5px;" size="large"
-        name="home" slot="start"></ion-icon>
+      <ion-icon style="margin-left: 5px; margin-right: 5px;"  size="large" name="home" slot="start"></ion-icon>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
     <!-- Move ion-menu-toggle button  *ngIf="showPowerIcon"to the right by placing it in a slot="end" -->
     <ion-menu-toggle *ngFor="let item of outlets" class="ion-hide-md-up">
-      <ion-button name="home" class="Shops"
-        (click)="link(item.Id)">{{item.Name}}</ion-button>
+      <ion-button name="home" class="Shops" (click)="link(item.Id)">{{item.Name}}</ion-button>
     </ion-menu-toggle>
   </ion-content>
 </ion-menu>
