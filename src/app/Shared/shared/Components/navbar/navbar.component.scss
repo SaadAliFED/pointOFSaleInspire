@@ -3,3 +3,25 @@
     width: 55px;
     height: 50px;
   }
+ ::ng-deep{
+   .Shops{
+    width: 230px;
+    align-items: center;
+    --background: #2c5d82;
+
+     }
+   .Shops:hover {
+    opacity: 0.7;
+ }
+.item{
+   font-weight: bold;
+  color: whitesmoke;
+  
+}
+.item:hover{
+  opacity: 0.8;
+}
+  
+ 
+ } 
+ 

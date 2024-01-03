@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../Services/authentication.service';
 import { ApiResponse } from 'src/app/Domain/api-response';
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
     private toastController: ToastController,
     private dashboardService: DashboardService
   ) { }
-
+  
   ngOnInit() {
     this.GetOutlets()
   }
