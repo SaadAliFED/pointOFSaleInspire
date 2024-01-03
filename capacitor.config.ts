@@ -5,7 +5,11 @@ const config: CapacitorConfig = {
   appName: 'PointOfSales',
   webDir: 'www',
   server: {
-    androidScheme: 'http'
+    androidScheme: 'http',
+    cleartext: true,
+    allowNavigation: [
+      "http://103.74.54.207:8181/api/*"
+    ]
   }
 };
 
