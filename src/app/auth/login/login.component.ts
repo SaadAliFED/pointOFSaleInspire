@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { ApiResponse } from 'src/app/Domain/api-response';
 import { AuthenticationService } from 'src/app/Shared/shared/Services/authentication.service';
+import { DashboardService } from 'src/app/Shared/shared/Services/dashboard.service';
 import { UtilityService } from 'src/app/Shared/shared/Services/utility.service';
 
 @Component({
@@ -20,10 +21,12 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   showLoader: boolean = true;
   ReturnUrl: string = '';
+  outlets: any;
   constructor(private router: Router,
     private authService: AuthenticationService,
     private toastController: ToastController,
     private utility: UtilityService,
+    private dashboardService: DashboardService,
     private route: ActivatedRoute,
   ) { }
 
@@ -42,14 +45,24 @@ export class LoginComponent implements OnInit {
   }
 
   Login() {
-    // this.loginForm.markAllAsTouched()
-    // if (this.loginForm.invalid) return;a
+    this.loginForm.markAllAsTouched()
+    if (this.loginForm.invalid) return;
     this.authService.Login(this.loginForm.value).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.utility.SetLoginData(response?.ReturnObject);
         this.presentSuccessToast('Login Successfully');
-        // if (response.ReturnObject.TotalOutlets > 1) {
-        //   this.router.navigate(["outlet"])
+        // if (response.ReturnObject.TotalOutlets > 0) {
+        //   this.dashboardService.GetOutlets().subscribe((response: ApiResponse) => {
+        //     debugger
+        //     if (response.IsSuccess ) {
+        //       this.outlets = response.ReturnObject;
+
+        //     }
+        //   })
+        //   this.router.navigate([this.ReturnUrl], { queryParams: { outletId: this.outlets[0].id} })
+
+        //   // this.router.navigate([this.ReturnUrl], { queryParams: { outletId: response.ReturnObject.OutletId } })
+
         // }
         // else {
           this.router.navigate([this.ReturnUrl], { queryParams: { outletId: response.ReturnObject.OutletId } })

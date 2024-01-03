@@ -129,13 +129,13 @@ export class HomePage {
     this.dashboardService.GetDailySummaryByDate(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.detail = response.ReturnObject;
-        this.CalculateTodayTotal(this.dailySummary);
+        this.CalculateTodayTotal(this.detail);
       }
     })
   }
   CalculateTodayTotal(data: any[]) {
     data.forEach((x) => {
-      this.todayTotal += x.CashAmount;
+      this.todayTotal += x.SalesAmount;
     })
   }
 
