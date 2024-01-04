@@ -35,18 +35,15 @@
 
 <ion-menu contentId="main-content">
   <ion-header>
-    <ion-toolbar
-      style="--background:linear-gradient(to bottom right, #66b2ed, #1f3b50) !important; color: whitesmoke;">
+    <ion-toolbar style="--background:linear-gradient(to bottom right, #66b2ed, #1f3b50) !important; color: whitesmoke;">
       <ion-title>Shops</ion-title>
-      <ion-icon style="margin-left: 5px; margin-right: 5px;" size="large"
-        name="home" slot="start"></ion-icon>
+      <ion-icon style="margin-left: 5px; margin-right: 5px;"  size="large" name="home" slot="start"></ion-icon>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
     <!-- Move ion-menu-toggle button  *ngIf="showPowerIcon"to the right by placing it in a slot="end" -->
     <ion-menu-toggle *ngFor="let item of outlets" class="ion-hide-md-up">
-      <ion-button name="home" class="Shops"
-        (click)="link(item.Id)">{{item.Name}}</ion-button>
+      <ion-button name="home" class="Shops" (click)="link(item.Id)">{{item.Name}}</ion-button>
     </ion-menu-toggle>
   </ion-content>
 </ion-menu>
