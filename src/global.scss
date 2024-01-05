@@ -30,4 +30,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-}
+    --ion-safe-area-top: 20px;
+    --ion-safe-area-bottom: 20px;
+  }
+  
