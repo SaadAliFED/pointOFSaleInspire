@@ -30,7 +30,7 @@ export class NavbarComponent implements OnInit {
   outlets: any[] = [];
 
   GetOutlets() {
-    debugger
+    
     this.dashboardService.GetOutlets().subscribe((response: ApiResponse) => {
       if (response.IsSuccess && response.ReturnObject.length > 0) {
         this.outlets = response.ReturnObject;

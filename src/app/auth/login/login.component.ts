@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit {
         this.presentSuccessToast('Login Successfully');
         // if (response.ReturnObject.TotalOutlets > 0) {
         //   this.dashboardService.GetOutlets().subscribe((response: ApiResponse) => {
-        //     debugger
+        //     
         //     if (response.IsSuccess ) {
         //       this.outlets = response.ReturnObject;
 

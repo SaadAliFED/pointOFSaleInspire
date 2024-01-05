@@ -13,7 +13,7 @@ export class UtilityService {
     return localStorage.getItem('userToken')
   }
   SetLoginData(authData: any) {
-    debugger
+    
     localStorage.setItem('userId', authData?.Id);
     localStorage.setItem('userName', authData?.Name + ' ' + authData.FatherName);
     localStorage.setItem('userEmail', authData?.Email);

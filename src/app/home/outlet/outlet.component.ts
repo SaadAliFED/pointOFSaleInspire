@@ -17,7 +17,7 @@ export class OutletComponent  implements OnInit {
       this.GetOutlets()
     }
     GetOutlets() {
-      debugger
+      
       this.dashboardService.GetOutlets().subscribe((response: ApiResponse) => {
         if (response.IsSuccess && response.ReturnObject.length > 0) {
           this.outlets = response.ReturnObject;

@@ -29,7 +29,7 @@ export class ForgetpasswordComponent  implements OnInit {
 
   forget() {
 
-    debugger
+    
     this.ForgetForm.markAllAsTouched()
     if (this.ForgetForm.invalid) return;
     const email = this.ForgetForm.get('Email')?.value;

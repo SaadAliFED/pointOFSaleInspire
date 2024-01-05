@@ -30,7 +30,11 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    --ion-safe-area-top: 20px;
-    --ion-safe-area-bottom: 20px;
+  }
+  @media only screen and (max-width: 767px) {
+    body {
+      --ion-safe-area-top: 30px;
+      --ion-safe-area-bottom: 20px;
+    }
   }
   

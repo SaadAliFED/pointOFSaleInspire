@@ -31,7 +31,7 @@ export class ResetPasswordComponent  implements OnInit {
 
   resetPassword() {
 
-    debugger
+    
     this.resetPasswordForm.markAllAsTouched()
     if (this.resetPasswordForm.invalid) return;
     const email = this.resetPasswordForm.get('Email')?.value;
