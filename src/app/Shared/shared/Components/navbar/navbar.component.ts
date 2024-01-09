@@ -11,16 +11,24 @@ import { DashboardService } from '../../Services/dashboard.service';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
+  selectedOutletId: any;
 
   constructor(
     private authService: AuthenticationService,
     private router: Router,
     private toastController: ToastController,
-    private dashboardService: DashboardService
+    private dashboardService: DashboardService,
+    private route: ActivatedRoute
   ) { }
   
   ngOnInit() {
     this.GetOutlets()
+    // this.route.paramMap.subscribe(params => {
+    //   // Use the paramMap to get the 'outletId' parameter from the route
+    //   this.selectedOutletId = params.get('outletId');
+    // });
+  this.selectedOutletId=  this.route.snapshot.queryParamMap.get('outletId')
+  // alert(this.selectedOutletId)
   }
 
   link(id: any) {

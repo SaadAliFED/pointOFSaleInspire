@@ -16,11 +16,7 @@ export class HomePage {
   data: any;
   options: any;
   chart: any;
-  detail = [
-    { CashAmount: 'any', CreditCardAmount: 'exp', SalesAmount: 2021, SummaryDateString: "12-02-2018" },
-    { CashAmount: 'any', CreditCardAmount: 'exp', SalesAmount: 2022, SummaryDateString: "12-02-2018" },
-    // Add more data as needed
-  ];
+  detail: any[] = [];
   groupSummary: any[] = [];
   itemSummary: any[] = [];
   dailySummary: any[] = [];
@@ -126,20 +122,24 @@ export class HomePage {
   }
 
   GetDailySummaryByDate(outletId: number) {
+    this.detail = []
     this.dashboardService.GetDailySummaryByDate(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.detail = response.ReturnObject;
+        console.log('detail', this.detail)
         this.CalculateTodayTotal(this.detail);
       }
     })
   }
   CalculateTodayTotal(data: any[]) {
+    this.todayTotal = 0;
     data.forEach((x) => {
       this.todayTotal += x.SalesAmount;
     })
   }
 
   GetGroupSummary(outletId: number) {
+    this.itemSummary = []
     this.dashboardService.GetGroupSummary(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.itemSummary = response.ReturnObject;
@@ -148,6 +148,7 @@ export class HomePage {
   }
 
   GetTraction(outletId: number) {
+    this.traction = []
     this.dashboardService.GetTraction(outletId).subscribe((response: ApiResponse) => {
       if (response.IsSuccess) {
         this.traction = response.ReturnObject;

@@ -51,22 +51,13 @@ export class LoginComponent implements OnInit {
       if (response.IsSuccess) {
         this.utility.SetLoginData(response?.ReturnObject);
         this.presentSuccessToast('Login Successfully');
-        // if (response.ReturnObject.TotalOutlets > 0) {
-        //   this.dashboardService.GetOutlets().subscribe((response: ApiResponse) => {
-        //     
-        //     if (response.IsSuccess ) {
-        //       this.outlets = response.ReturnObject;
+        this.dashboardService.GetOutlets().subscribe((response: ApiResponse) => {
+         
+            this.outlets = response.ReturnObject;
+            this.router.navigate([this.ReturnUrl], { queryParams: { outletId: response.ReturnObject[0].Id } })
 
-        //     }
-        //   })
-        //   this.router.navigate([this.ReturnUrl], { queryParams: { outletId: this.outlets[0].id} })
-
-        //   // this.router.navigate([this.ReturnUrl], { queryParams: { outletId: response.ReturnObject.OutletId } })
-
-        // }
-        // else {
-          this.router.navigate([this.ReturnUrl], { queryParams: { outletId: response.ReturnObject.OutletId } })
-        // }
+          
+        })
 
       } else {
         this.presentErrorToast('Invalid credentials');
